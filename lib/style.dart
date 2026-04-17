@@ -1,34 +1,77 @@
 import 'package:flutter/material.dart';
 
+Color baseGreen = Color(0xff036C17);
+Color gradiant = Color(0xff5FCA00);
+Color active = Colors.limeAccent;
+Color canvasColor = Color(0xffD0E775);
+Color black = Colors.black;
 
 ColorScheme fairyGumbaColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xffF2ECDE),
+  primary: canvasColor,
   onPrimary: Color(0xffAE4202),
-  secondary: Color(0xff036C17),
+  secondary: baseGreen,
   onSecondary: Color(0xff5FCA00),
-  error: Color(0xff036C17),
+  error: baseGreen,
   onError: Color(0xffAE4202),
   surface: Color(0xffF2ECDE),
   onSurface: Color(0xffAE4202),
-);    
+  onSecondaryFixed: Colors.amber,
+  onSecondaryFixedVariant: Colors.limeAccent,
+  
+);
 
 ThemeData fairyGumba = ThemeData(
   colorScheme: fairyGumbaColorScheme,
+  textTheme: TextTheme(
+    titleSmall: TextStyle(
+      color: fairyGumbaColorScheme.onPrimary,
+      fontSize: 12,
+      fontVariations: List.from([FontVariation.italic(1.0)]),
+    ),
+    bodyMedium: TextStyle(color: black),
+    bodyLarge: TextStyle(
+      color: black,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+    labelMedium: TextStyle(
+      color: baseGreen,
+      fontWeight: FontWeight(1000),
+    ),
+  ),
 );
 
-abstract class AppSpacing{
+abstract class AppSpacing {
   static const double small = 8.0;
   static const double medium = 16.0;
   static const double large = 24.0;
 }
 
-abstract class AppBorderRadius{
+abstract class AppBorderRadius {
   static const double small = 8.0;
   static const double medium = 16.0;
   static const double large = 24.0;
 }
 
-abstract class AppDimensions{
-  static const double appBarHeight = 92.0;
+abstract class AppDimensions {
+  static double CircularButtonSize = 28;
+  static double iconSize = 16;
+  static double appBarHeight(double? appHeight) =>
+      appHeight != null ? .05 * appHeight : 32.00;
+  static double activeMonthsBarHeight(double? appHeight) =>
+      appHeight != null ? .04 * appHeight : 24.00;
 }
+
+abstract class AppBorders {
+  static const double thinBordersize = 1.0;
+  static const double largeBorderSize = 4.0;
+}
+
+EdgeInsets gumbaCardPadding = EdgeInsets.fromLTRB(
+  AppSpacing.medium,
+  0,
+  AppSpacing.medium,
+  AppSpacing.large,
+
+);

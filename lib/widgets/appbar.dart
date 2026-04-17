@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
 
-class GumbaAppBar extends StatelessWidget implements PreferredSizeWidget {
+class GumbaAppBar extends StatelessWidget  {
   const GumbaAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
       decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
-      margin: EdgeInsets.only(top: AppSpacing.large),
+      margin: EdgeInsets.only(top: AppSpacing.large ,bottom: AppBorderRadius.large),
       child: Row(
+        spacing: AppSpacing.large,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GoToLexiconButton(),
@@ -22,9 +24,6 @@ class GumbaAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(AppDimensions.appBarHeight);
 }
 
 class GoToLexiconButton extends StatelessWidget {
@@ -99,8 +98,8 @@ class AppBarButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.onSecondary.withValues(alpha: .5)
       ),
-      margin: EdgeInsets.all(AppSpacing.small),
-      child: IconButton(color: colors.onSurface, onPressed: onPressed, icon: Icon(icon)),
+      
+      child: IconButton(color: colors.onSurface, onPressed: onPressed, icon: Icon(icon,size: 16,)),
     );
   }
 }
