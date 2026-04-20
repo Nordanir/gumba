@@ -5,6 +5,8 @@ Color gradiant = Color(0xff5FCA00);
 Color active = Colors.limeAccent;
 Color canvasColor = Color(0xffD0E775);
 Color black = Colors.black;
+Color lightBlue = Colors.lightBlue; 
+Color lightRed = Colors.redAccent;
 
 ColorScheme fairyGumbaColorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -46,16 +48,18 @@ abstract class AppSpacing {
   static const double small = 8.0;
   static const double medium = 16.0;
   static const double large = 24.0;
+  static const double xl = 48.0;
 }
 
 abstract class AppBorderRadius {
   static const double small = 8.0;
   static const double medium = 16.0;
   static const double large = 24.0;
+  static const double xl = 48;
 }
 
 abstract class AppDimensions {
-  static double CircularButtonSize = 28;
+  static double circularButtonSize = 28;
   static double iconSize = 16;
   static double appBarHeight(double? appHeight) =>
       appHeight != null ? .05 * appHeight : 32.00;
@@ -70,7 +74,7 @@ abstract class AppBorders {
 
 EdgeInsets gumbaCardPadding = EdgeInsets.fromLTRB(
   AppSpacing.medium,
-  0,
+  AppBorderRadius.xl,
   AppSpacing.medium,
   AppSpacing.large,
 

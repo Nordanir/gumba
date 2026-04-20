@@ -9,8 +9,9 @@ class GumbaAppBar extends StatelessWidget  {
   Widget build(BuildContext context) {
     return Container(
       height: AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
-      decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
-      margin: EdgeInsets.only(top: AppSpacing.large ,bottom: AppBorderRadius.large),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary),
+      margin: EdgeInsets.only(top: AppSpacing.xl ,bottom: AppBorderRadius.large),
       child: Row(
         spacing: AppSpacing.large,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -96,6 +97,7 @@ class AppBarButton extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
         color: colors.onSecondary.withValues(alpha: .5)
       ),
       

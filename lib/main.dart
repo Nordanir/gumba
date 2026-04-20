@@ -3,8 +3,7 @@ import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
 import 'package:gumba/style.dart';
 import 'package:gumba/widget_text.dart';
-import 'package:gumba/widgets/appbar.dart';
-import 'package:gumba/widgets/gumba_card.dart';
+import 'package:gumba/widgets/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {"/home" : (context) => HomePage()} ,
       title: appTitle,
       debugShowCheckedModeBanner: false,
       theme: fairyGumba,
@@ -39,12 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:  canvasColor,
-      body: Column(
-        children: [
-          GumbaAppBar(),
-          GumbaCard(mushroom: testMushroom),
-        ],
-      ),
+      body: HomePage(),
     );
   }
 }
@@ -58,3 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
     activeMonths: [1,8,9,10],
     symbols: [GumbaSymbols.edible.value, GumbaSymbols.growsInGrassLand.value ]
   );
+
+
+ 

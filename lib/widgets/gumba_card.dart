@@ -42,7 +42,10 @@ class GumbaCard extends StatelessWidget {
                 Expanded(flex: 7, child: Details(mushroom)),
                 Expanded(
                   flex: 3,
-                  child: SymbolColumn(symbols: mushroom.symbols),
+                  child: DisplaySymbols(
+                    symbols: mushroom.symbols,
+                    isVertical: true,
+                  ),
                 ),
               ],
             ),
@@ -76,7 +79,6 @@ class ActiveMonthsBar extends StatelessWidget {
           baseColorList[month] = gradiant;
         }
 
-        logger.i('Setting $month to active');
         baseColorList[month - 1] = active;
       }
     }
@@ -87,10 +89,9 @@ class ActiveMonthsBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final appwidth = MediaQuery.sizeOf(context).width;
     final monthColors = setColorsForActiveMonths(activeMonths);
-    final activeMonthsSectionWidth = (appwidth -
-                  AppSpacing.medium * 2 -
-                  AppBorders.largeBorderSize * 2) /
-              12;
+    final activeMonthsSectionWidth =
+        (appwidth - AppSpacing.medium * 2 - AppBorders.largeBorderSize * 2) /
+        12;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -106,8 +107,7 @@ class ActiveMonthsBar extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => Container(
-          width:
-              activeMonthsSectionWidth,
+          width: activeMonthsSectionWidth,
           decoration: BoxDecoration(
             color: monthColors[index],
             border: Border.all(
@@ -122,17 +122,31 @@ class ActiveMonthsBar extends StatelessWidget {
   }
 }
 
-class SymbolColumn extends StatelessWidget {
-  const SymbolColumn({super.key, required this.symbols});
+class DisplaySymbols extends StatelessWidget {
+  const DisplaySymbols({
+    super.key,
+    required this.symbols,
+    required this.isVertical,
+  });
   final List<GumbaSymbol> symbols;
+  final bool isVertical;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: AppSpacing.large,
-      children: [
-        for (GumbaSymbol symbol in symbols) SymbolCard(symbol: symbol),
-      ],
-    );
+    return isVertical
+        ? Column(
+            spacing: AppSpacing.large,
+            children: [
+              for (GumbaSymbol symbol in symbols) SymbolCard(symbol: symbol),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: AppSpacing.large,
+            children: [
+              for (GumbaSymbol symbol in symbols) SymbolCard(symbol: symbol),
+            ],
+          );
   }
 }
 
@@ -142,12 +156,12 @@ class SymbolCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.CircularButtonSize,
+      width: AppDimensions.circularButtonSize,
       decoration: BoxDecoration(
         border: Border.all(color: baseGreen),
         borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
       ),
-      child: Icon(symbol.icon ,),
+      child: Icon(symbol.icon),
     );
   }
 }
@@ -203,7 +217,6 @@ class GumbaCardTopBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppSpacing.small),
       decoration: BoxDecoration(
-        
         border: Border.all(color: black),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppBorderRadius.small),
@@ -213,7 +226,7 @@ class GumbaCardTopBar extends StatelessWidget {
       child: Row(
         children: [
           GumbaCardTopBarButton(
-            onpressed: () => (logger.i('I have to be implemented')),
+            onpressed: () => {Navigator.pop(context)},
             icon: Icons.back_hand,
           ),
           Spacer(),
@@ -238,14 +251,18 @@ class GumbaCardTopBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.CircularButtonSize,
-      height: AppDimensions.CircularButtonSize,
+      width: AppDimensions.circularButtonSize,
+      height: AppDimensions.circularButtonSize,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          shape: BoxShape.circle,
-        border: Border.all(color: black)
+        shape: BoxShape.circle,
+        border: Border.all(color: black),
       ),
-      child: IconButton(onPressed: onpressed, padding: EdgeInsets.zero, icon: Icon(icon, size: AppDimensions.iconSize)),
+      child: IconButton(
+        onPressed: onpressed,
+        padding: EdgeInsets.zero,
+        icon: Icon(icon, size: AppDimensions.iconSize),
+      ),
     );
   }
 }

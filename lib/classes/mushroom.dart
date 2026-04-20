@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gumba/classes/symbols.dart';
 
 class Mushroom {
+  String? type;
   String id;
   String name;
   String latinName;
@@ -18,15 +19,16 @@ class Mushroom {
   List<int> activeMonths;
 
   Mushroom({
+    
     required this.id,
     required this.name,
     required this.latinName,
     required this.flesh,
     required this.culinaryUse,
-     required this.activeMonths,
-         required this.symbols,
+    required this.activeMonths,
+    required this.symbols,
     required this.occurrence,
-
+    this.type,
     this.cap,
     this.image,
     this.stem,
