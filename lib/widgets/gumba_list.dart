@@ -59,7 +59,7 @@ class GumbaListCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: ClipRRect(
-                child: mushroom.image ?? 
+                child: mushroom.imageUrl !=null ?  Image.asset(mushroom.imageUrl!) :
                      Image.asset('assets/test.jpg', fit: BoxFit.cover),
               ),
             ),

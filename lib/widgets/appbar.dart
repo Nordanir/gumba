@@ -7,12 +7,10 @@ class GumbaAppBar extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary),
+    return  Container(
+      height:  AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
       margin: EdgeInsets.only(top: AppSpacing.xl ,bottom: AppBorderRadius.large),
-      child: Row(
+      child: const Row(
         spacing: AppSpacing.large,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -33,7 +31,7 @@ class GoToLexiconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      icon: Icons.book,
+      imageURL: "assets/gumba_log.png",
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -45,7 +43,7 @@ class AddFromDataBaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      icon: Icons.add,
+      imageURL: "assets/gumba_log.png",
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -57,7 +55,7 @@ class GumbaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      icon: Icons.yard,
+      imageURL: "assets/gumba_log.png",
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -69,7 +67,7 @@ class SavedGumbasButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      icon: Icons.save,
+      imageURL: "assets/gumba_log.png",
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -81,27 +79,30 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBarButton(
-      icon: Icons.settings,
+      imageURL: "assets/gumba_log.png",
       onPressed: onSettingsButtonPressed,
     );
   }
 }
 
 class AppBarButton extends StatelessWidget {
-  final IconData icon;
+  final String imageURL;
   final VoidCallback onPressed;
-  const AppBarButton({super.key, required this.icon, required this.onPressed});
+  const AppBarButton({super.key, required this.imageURL, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return Container(
-      decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
-        color: colors.onSecondary.withValues(alpha: .5)
+    return GestureDetector(
+      onTap: () => (onSettingsButtonPressed()),
+      child: Container(
+        decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
+          color: colors.onSecondary.withValues(alpha: .5)
+        ),
+        
+        child: Image.asset(imageURL),
       ),
-      
-      child: IconButton(color: colors.onSurface, onPressed: onPressed, icon: Icon(icon,size: 16,)),
     );
   }
 }

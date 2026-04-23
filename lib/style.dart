@@ -5,7 +5,7 @@ Color gradiant = Color(0xff5FCA00);
 Color active = Colors.limeAccent;
 Color canvasColor = Color(0xffD0E775);
 Color black = Colors.black;
-Color lightBlue = Colors.lightBlue; 
+Color lightBlue = Colors.lightBlue;   
 Color lightRed = Colors.redAccent;
 
 ColorScheme fairyGumbaColorScheme = ColorScheme(
@@ -62,7 +62,7 @@ abstract class AppDimensions {
   static double circularButtonSize = 28;
   static double iconSize = 16;
   static double appBarHeight(double? appHeight) =>
-      appHeight != null ? .05 * appHeight : 32.00;
+      appHeight != null ? .06 * appHeight : 32.00;
   static double activeMonthsBarHeight(double? appHeight) =>
       appHeight != null ? .04 * appHeight : 24.00;
 }

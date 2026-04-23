@@ -1,13 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:gumba/classes/symbols.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+//part 'mushroom.g.dart';
+
+@JsonSerializable()
 class Mushroom {
   String? type;
   String id;
   String name;
   String latinName;
   String? cap;
-  Image? image;
+  String? imageUrl; 
   String? stem;
   String? gills;
   String flesh;
@@ -17,6 +20,9 @@ class Mushroom {
   String? hymenium;
   List<GumbaSymbol> symbols;
   List<int> activeMonths;
+  
+  //factory Mushroom.fromJson(Map<String, dynamic> json) => _$MushroomFromJson(json);
+  //Map<String, dynamic> toJson() => _$MushroomToJson(this);
 
   Mushroom({
     
@@ -30,7 +36,7 @@ class Mushroom {
     required this.occurrence,
     this.type,
     this.cap,
-    this.image,
+    this.imageUrl,
     this.stem,
     this.gills,
     this.frutingLayer,
