@@ -37,13 +37,19 @@ class _MyHomePageState extends State<MyHomePage> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:  canvasColor,
-      body: HomePage(),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: const AssetImage("assets/gumba_canvas.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: HomePage()
     );
   }
 }
- Mushroom testMushroom = Mushroom(
+
+Mushroom testMushroom = Mushroom(
     id: '1',
     flesh: 'This is a test mushroom.',
     culinaryUse: 'Edible',

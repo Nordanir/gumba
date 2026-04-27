@@ -15,10 +15,8 @@ class GumbaAppBar extends StatelessWidget  {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GoToLexiconButton(),
-          AddFromDataBaseButton(),
           GumbaButton(),
           SavedGumbasButton(),
-          SettingsButton(),
         ],
       ),
     );
@@ -31,7 +29,7 @@ class GoToLexiconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      imageURL: "assets/gumba_log.png",
+      imageURL: AppImagePaths.databaseIconImage,
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -43,7 +41,7 @@ class AddFromDataBaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      imageURL: "assets/gumba_log.png",
+      imageURL: AppImagePaths.gumbaIconImage,
       onPressed: onSettingsButtonPressed,
     );
   }
@@ -67,7 +65,7 @@ class SavedGumbasButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppBarButton(
-      imageURL: "assets/gumba_log.png",
+      imageURL: AppImagePaths.savedGumbasIconImage,
       onPressed: onSettingsButtonPressed,
     );
   }

@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+
+abstract class AppImagePaths {
+  static const String defaulMushroomImage = 'assets/test.jpg';
+  static const String canvasImage = "assets/gumba_canvas.png";
+  static const String databaseIconImage = "assets/databaseIcon.png";
+  static const String gumbaIconImage = "assets/gumba_log.png";
+  static const String savedGumbasIconImage = "assets/catalog.png";
+}
+
 Color baseGreen = Color(0xff036C17);
 Color gradiant = Color(0xff5FCA00);
 Color active = Colors.limeAccent;
@@ -16,7 +25,7 @@ ColorScheme fairyGumbaColorScheme = ColorScheme(
   onSecondary: Color(0xff5FCA00),
   error: baseGreen,
   onError: Color(0xffAE4202),
-  surface: Color(0xffF2ECDE),
+  surface: Color.fromARGB(255, 47, 41, 28),
   onSurface: Color(0xffAE4202),
   onSecondaryFixed: Colors.amber,
   onSecondaryFixedVariant: Colors.limeAccent,
@@ -38,11 +47,13 @@ ThemeData fairyGumba = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     labelMedium: TextStyle(
-      color: baseGreen,
-      fontWeight: FontWeight(1000),
+      color: black,
+      fontWeight: FontWeight(800),
+      fontSize: 16
     ),
   ),
 );
+
 
 abstract class AppSpacing {
   static const double small = 8.0;
@@ -59,6 +70,9 @@ abstract class AppBorderRadius {
 }
 
 abstract class AppDimensions {
+  static double defaulDeviceHeight = 2400;
+  static double defaulDeviceWidth = 1080;
+
   static double circularButtonSize = 28;
   static double iconSize = 16;
   static double appBarHeight(double? appHeight) =>

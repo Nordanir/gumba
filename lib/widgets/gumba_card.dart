@@ -26,7 +26,7 @@ class GumbaCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
                 ),
-                child: Image.asset('assets/test.jpg'),
+                child: Image.asset(AppImagePaths.defaulMushroomImage),
               ),
               ActiveMonthsBar(activeMonths: mushroom.activeMonths),
             ],
@@ -158,7 +158,7 @@ class SymbolCard extends StatelessWidget {
     return Container(
       width: AppDimensions.circularButtonSize,
       decoration: BoxDecoration(
-        border: Border.all(color: baseGreen),
+        border: Border.all(color: black),
         borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
       ),
       child: Icon(symbol.icon),

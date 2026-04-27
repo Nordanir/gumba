@@ -51,7 +51,7 @@ class GumbaListCard extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: _cardColor, // ✅ Always correct from frame 1
+          color: _cardColor,
           border: Border.all(color: black),
         ),
         child: Column(
@@ -77,12 +77,7 @@ class GumbaListCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13,
-                          decoration: TextDecoration.none,
-                          textBaseline: TextBaseline.alphabetic,
-                        ),
+                        style: fairyGumba.textTheme.labelMedium,
                       ),
                     ),
                     Flexible(

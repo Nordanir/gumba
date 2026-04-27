@@ -9,16 +9,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: canvasColor
-      ),
-      child: Column(
-          children: [
-            const GumbaAppBar(),
-            GumbaList(mushrooms: testMushrooms)
-          ],
-        ),
-    );
+    return Column(
+        children: [
+          const GumbaAppBar(),
+          GumbaList(mushrooms: testMushrooms)
+        ],
+      );
   }
 }
