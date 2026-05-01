@@ -7,6 +7,18 @@ abstract class AppImagePaths {
   static const String databaseIconImage = "assets/databaseIcon.png";
   static const String gumbaIconImage = "assets/gumba_log.png";
   static const String savedGumbasIconImage = "assets/catalog.png";
+  static const String edibleIconImage = "assets/edible_icon.png";
+  static const String conditionallyEdibleIconImage = "assets/conditionally_edible_icon.png";
+  static const String notEdibleIconImage = "assets/not_edible_icon.png";
+  static const String poisonousIconImage = "assets/poisonous_icon.png";
+  static const String canBeSoldInHungaryIconImage = "assets/can_be_sold_in_hungary_icon.png";
+  static const String protectedIconImage = "assets/protected_icon.png";
+  static const String growsInLeafForestIconImage = "assets/grows_in_leafy_forest_icon.png";
+  static const String growsInConiferousForestIconImage = "assets/grows_in_coniferous_forest_icon.png";
+  static const String growsInGrassLandIconImage = "assets/grows_in_grassland_icon.png";
+  static const String growsOnWoodIconImage = "assets/grows_on_wood_icon.png";
+  static const String hasHealingPropertiesIconImage = "assets/has_healing_properties_icon.png";
+
 }
 
 Color baseGreen = Color(0xff036C17);
@@ -33,11 +45,12 @@ ColorScheme fairyGumbaColorScheme = ColorScheme(
 );
 
 ThemeData fairyGumba = ThemeData(
+  fontFamily: 'Ithaca',
   colorScheme: fairyGumbaColorScheme,
   textTheme: TextTheme(
     titleSmall: TextStyle(
       color: fairyGumbaColorScheme.onPrimary,
-      fontSize: 12,
+      fontSize: 14,
       fontVariations: List.from([FontVariation.italic(1.0)]),
     ),
     bodyMedium: TextStyle(color: black),
@@ -47,6 +60,7 @@ ThemeData fairyGumba = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     labelMedium: TextStyle(
+      letterSpacing: 2,
       color: black,
       fontWeight: FontWeight(800),
       fontSize: 16

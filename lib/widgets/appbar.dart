@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gumba/classes/mushroom.dart';
+import 'package:gumba/display_controller.dart';
 import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
+import 'package:provider/provider.dart';
 
 class GumbaAppBar extends StatelessWidget  {
   const GumbaAppBar({super.key});
@@ -28,24 +31,14 @@ class GoToLexiconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppBarButton(
+    return AppBarButton(
       imageURL: AppImagePaths.databaseIconImage,
-      onPressed: onSettingsButtonPressed,
+      onPressed: () => onEncyclopediaButtonPressed(context),
     );
   }
 }
 
-class AddFromDataBaseButton extends StatelessWidget {
-  const AddFromDataBaseButton({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const AppBarButton(
-      imageURL: AppImagePaths.gumbaIconImage,
-      onPressed: onSettingsButtonPressed,
-    );
-  }
-}
 
 class GumbaButton extends StatelessWidget {
   const GumbaButton({super.key});
@@ -64,9 +57,9 @@ class SavedGumbasButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppBarButton(
+    return  AppBarButton(
       imageURL: AppImagePaths.savedGumbasIconImage,
-      onPressed: onSettingsButtonPressed,
+      onPressed: () => onSavedGumbasButtonPressed(context),
     );
   }
 }
@@ -92,7 +85,7 @@ class AppBarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return GestureDetector(
-      onTap: () => (onSettingsButtonPressed()),
+      onTap: () => (onPressed()),
       child: Container(
         decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
@@ -107,4 +100,14 @@ class AppBarButton extends StatelessWidget {
 
 void onSettingsButtonPressed() {
   logger.d('Settings button pressed');
+}
+
+void onEncyclopediaButtonPressed(BuildContext context) {
+  logger.d('Encyclopedia button pressed');
+  Provider.of<DisplayController>(context, listen: false).setDisplayedMushrooms = Provider.of<MushroomEncyclopedia>(context, listen: false).mushrooms;
+}
+
+void onSavedGumbasButtonPressed(BuildContext context) {
+  logger.d('Saved Gumbas button pressed');
+  Provider.of<DisplayController>(context, listen: false).setDisplayedMushrooms = Provider.of<SavedMushrooms>(context, listen: false).mushrooms;
 }

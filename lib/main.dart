@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
+import 'package:gumba/classes/test_mushrooms.dart';
+import 'package:gumba/display_controller.dart';
+import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
 import 'package:gumba/widget_text.dart';
 import 'package:gumba/widgets/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,15 +16,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {"/home" : (context) => HomePage()} ,
-      title: appTitle,
-      debugShowCheckedModeBanner: false,
-      theme: fairyGumba,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => MushroomEncyclopedia(mushrooms: [])),
+        Provider(create: (_) => SavedMushrooms(mushrooms: [])),
+        ChangeNotifierProvider<DisplayController>(create: (_) => DisplayController()),
+      ],
+      child: MaterialApp(
+        title: appTitle,
+        debugShowCheckedModeBanner: false,
+        theme: fairyGumba,
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
     );
   }
 }
@@ -35,6 +44,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
+  @override
+  void initState() {
+    final encyclopedia = Provider.of<MushroomEncyclopedia>(context, listen: false).mushrooms;
+    encyclopedia.addAll(testMushrooms);
+    final displayController = Provider.of<DisplayController>(context, listen: false);
+    displayController.setDisplayedMushrooms = encyclopedia;
+    super.initState();
+    logger.i("Home page initialized");
+  }
   @override
   Widget build(BuildContext context) {
     return Container(

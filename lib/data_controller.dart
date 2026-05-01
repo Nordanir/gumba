@@ -1,10 +1,11 @@
-import 'dart:io';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/util/ocr.dart';
 
 class DataInputController {
+
+
 
   void getDataFromImage(XFile image) async{
     final Ocr ocr = Ocr();
@@ -24,10 +25,16 @@ class DataInputController {
   }
   
 }
-/*
 class DataController {
-  List<Mushroom> getMushrooms(){
-    final profileJson = getMushroomsFromJson();
+  
+  List<Mushroom> getSaved(SavedMushrooms savedMushrooms){
+    return savedMushrooms.mushrooms;
   }
+   void saveMushroom(Mushroom mushroom, SavedMushrooms savedMushrooms)
+  {
+    savedMushrooms.addMushroom(mushroom);
+  }
+  //List<Mushroom> getMushrooms(){
+  //  final profileJson = getMushroomsFromJson();
+  //}
 }
-*/

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
+import 'package:gumba/data_controller.dart';
 import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
+import 'package:provider/provider.dart';
 
 class GumbaCard extends StatelessWidget {
   const GumbaCard({super.key, required this.mushroom});
@@ -21,7 +23,7 @@ class GumbaCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              GumbaCardTopBar(),
+              GumbaCardTopBar(mushroom: mushroom,),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
@@ -161,8 +163,8 @@ class SymbolCard extends StatelessWidget {
         border: Border.all(color: black),
         borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
       ),
-      child: Icon(symbol.icon),
-    );
+      child: Image.asset(symbol.iconPath));
+
   }
 }
 
@@ -174,46 +176,53 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        LabelText(label: "Flesh: ", text: mushroom.flesh),
-        LabelText(label: "Culinary use: ", text: mushroom.culinaryUse),
-        LabelText(label: "Occurrence: ", text: mushroom.occurrence),
+        LabelWithText(label: "Flesh: ", text: mushroom.flesh),
+        LabelWithText(label: "Culinary use: ", text: mushroom.culinaryUse),
+        LabelWithText(label: "Occurrence: ", text: mushroom.occurrence),
         if (mushroom.cap != null)
-          LabelText(label: "Cap: ", text: mushroom.cap!),
+          LabelWithText(label: "Cap: ", text: mushroom.cap!),
         if (mushroom.stem != null)
-          LabelText(label: "Stem: ", text: mushroom.stem!),
+          LabelWithText(label: "Stem: ", text: mushroom.stem!),
         if (mushroom.gills != null)
-          LabelText(label: "Gills: ", text: mushroom.gills!),
+          LabelWithText(label: "Gills: ", text: mushroom.gills!),
         if (mushroom.frutingLayer != null)
-          LabelText(label: "Fruiting Layer: ", text: mushroom.frutingLayer!),
+          LabelWithText(label: "Fruiting Layer: ", text: mushroom.frutingLayer!),
         if (mushroom.hymenium != null)
-          LabelText(label: "Hymenium: ", text: mushroom.hymenium!),
+          LabelWithText(label: "Hymenium: ", text: mushroom.hymenium!),
       ],
     );
   }
 }
 
-class LabelText extends StatelessWidget {
-  const LabelText({super.key, required this.label, required this.text});
+class LabelWithText extends StatelessWidget {
+  const LabelWithText({super.key, required this.label, required this.text});
 
   final String label;
   final String text;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Row(
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: RichText(
+        text: TextSpan(
       children: [
-        Text(label, style: textTheme.labelMedium),
-        Text(text, style: textTheme.bodyMedium),
+        TextSpan(text: label, style: textTheme.labelMedium),
+        TextSpan(text: text, style: textTheme.bodyMedium),
       ],
+        ),
+      ),
     );
   }
 }
 
 class GumbaCardTopBar extends StatelessWidget {
-  const GumbaCardTopBar({super.key});
-
+  const GumbaCardTopBar({super.key, required this.mushroom});
+  final Mushroom mushroom;
   @override
   Widget build(BuildContext context) {
+    final DataController dataController = DataController();
+    final SavedMushrooms savedMushrooms = Provider.of<SavedMushrooms>(context);
     return Container(
       padding: EdgeInsets.all(AppSpacing.small),
       decoration: BoxDecoration(
@@ -231,7 +240,7 @@ class GumbaCardTopBar extends StatelessWidget {
           ),
           Spacer(),
           GumbaCardTopBarButton(
-            onpressed: () => (logger.i('I have to be implemented')),
+            onpressed: () => (dataController.saveMushroom(mushroom, savedMushrooms)),
             icon: Icons.save,
           ),
         ],

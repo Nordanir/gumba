@@ -1,7 +1,7 @@
 import 'package:gumba/classes/symbols.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-//part 'mushroom.g.dart';
+part 'mushroom.g.dart';
 
 @JsonSerializable()
 class Mushroom {
@@ -21,8 +21,10 @@ class Mushroom {
   List<GumbaSymbol> symbols;
   List<int> activeMonths;
   
-  //factory Mushroom.fromJson(Map<String, dynamic> json) => _$MushroomFromJson(json);
-  //Map<String, dynamic> toJson() => _$MushroomToJson(this);
+  factory Mushroom.fromJson(Map<String, dynamic> json) => 
+      _$MushroomFromJson(json);
+      
+  Map<String, dynamic> toJson() => _$MushroomToJson(this);
 
   Mushroom({
     
@@ -42,4 +44,25 @@ class Mushroom {
     this.frutingLayer,
     this.hymenium,
   });
+}
+
+
+class MushroomEncyclopedia{
+  final List<Mushroom> mushrooms;
+
+  MushroomEncyclopedia({required this.mushrooms});
+}
+
+class SavedMushrooms{
+  final List<Mushroom> mushrooms;
+
+   void addMushroom(Mushroom mushroom){
+    mushrooms.add(mushroom);
+  }
+  void removeMushroom(Mushroom mushroom){
+    mushrooms.remove(mushroom);
+  }
+  
+
+  SavedMushrooms({required this.mushrooms});
 }
