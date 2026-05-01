@@ -51,6 +51,10 @@ class MushroomEncyclopedia{
   final List<Mushroom> mushrooms;
 
   MushroomEncyclopedia({required this.mushrooms});
+
+  void addMushrooms(List<Mushroom> mushroomsToAdd){
+      mushrooms.addAll(mushroomsToAdd);
+    }
 }
 
 class SavedMushrooms{
@@ -58,6 +62,8 @@ class SavedMushrooms{
 
    void addMushroom(Mushroom mushroom){
     mushrooms.add(mushroom);
+
+    
   }
   void removeMushroom(Mushroom mushroom){
     mushrooms.remove(mushroom);

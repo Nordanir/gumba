@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
-import 'package:gumba/classes/test_mushrooms.dart';
+import 'package:gumba/data_controller.dart';
 import 'package:gumba/display_controller.dart';
 import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
@@ -46,12 +46,19 @@ class _MyHomePageState extends State<MyHomePage> {
   
   @override
   void initState() {
-    final encyclopedia = Provider.of<MushroomEncyclopedia>(context, listen: false).mushrooms;
-    encyclopedia.addAll(testMushrooms);
+ super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    final encyclopedia = await  IOController.getMushroomsFromJson();
+    Provider.of<MushroomEncyclopedia>(context, listen: false).addMushrooms(encyclopedia);
     final displayController = Provider.of<DisplayController>(context, listen: false);
     displayController.setDisplayedMushrooms = encyclopedia;
-    super.initState();
+   
     logger.i("Home page initialized");
+    });
+
+    //IOController.saveMushroomsToJson(testMushrooms);
+    
+    
   }
   @override
   Widget build(BuildContext context) {

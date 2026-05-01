@@ -42,6 +42,6 @@ Map<String, dynamic> _$MushroomToJson(Mushroom instance) => <String, dynamic>{
   'occurrence': instance.occurrence,
   'frutingLayer': instance.frutingLayer,
   'hymenium': instance.hymenium,
-  'symbols': instance.symbols,
+  'symbols': instance.symbols.map((s) => s.toJson()).toList(),
   'activeMonths': instance.activeMonths,
 };

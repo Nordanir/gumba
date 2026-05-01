@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
 import 'package:gumba/data_controller.dart';
-import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
 import 'package:provider/provider.dart';
 

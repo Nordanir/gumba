@@ -14,6 +14,7 @@ class GumbaSymbol{
 
   factory GumbaSymbol.fromJson(Map<String, dynamic> json) => 
       _$GumbaSymbolFromJson(json);
+  Map<String, dynamic> toJson() => _$GumbaSymbolToJson(this);
 }
 
 enum GumbaSymbols{

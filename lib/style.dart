@@ -1,6 +1,44 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:gumba/logger.dart';
+import 'package:path_provider/path_provider.dart';
 
 
+
+class AppFilePaths {
+
+
+  static Future<String> get encyclopediaDataFilePath async {
+     String? filePath;
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final jsonDir = Directory('${directory.path}/json');
+      
+      logger.i('📂 Base directory: ${directory.path}');
+      logger.i('📁 Target directory: ${jsonDir.path}');
+
+      if (!await jsonDir.exists()) {
+        logger.i('🛠️ Creating directory...');
+        await jsonDir.create(recursive: true);
+      }
+
+      if (!await jsonDir.exists()) {
+        logger.e('❌ CRITICAL: Directory creation failed: ${jsonDir.path}');
+        throw FileSystemException('Failed to create or access directory', jsonDir.path);
+      }
+
+      filePath = '${jsonDir.path}/encyclopedia.json';
+      logger.i('✅ Path verified & cached: $filePath');
+      
+      return filePath;
+    } catch (e, stack) {
+      logger.e('❌ Path resolution failed: $e', stackTrace: stack);
+      rethrow; 
+    }
+  }
+
+}
 abstract class AppImagePaths {
   static const String defaulMushroomImage = 'assets/test.jpg';
   static const String canvasImage = "assets/gumba_canvas.png";
