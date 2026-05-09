@@ -1,4 +1,5 @@
-def test():
-    print("This is a test function ")
+import layoutparser as lp
 
-test()
+class BookDigitalizer:
+    def __init__(self):
+        self.layout_model = lp.

@@ -1,6 +1,7 @@
  import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/classes/symbols.dart';
 
+/// T
 List<Mushroom> testMushrooms = [
      Mushroom(
     id: '1',
@@ -11,7 +12,7 @@ List<Mushroom> testMushrooms = [
     occurrence: 'Common',
     activeMonths: [5,6,7,8,9,10],
     symbols: [GumbaSymbols.edible.value, GumbaSymbols.growsInGrassLand.value ],
-    type : "disc"
+    type : 'disc'
   ),
     Mushroom(
     id: '1',
@@ -22,7 +23,7 @@ List<Mushroom> testMushrooms = [
     occurrence: 'Common',
     activeMonths: [1,8,9,10],
     symbols: [GumbaSymbols.edible.value, GumbaSymbols.growsInGrassLand.value ],
-    type : "neither"
+    type : 'neither'
   ),
     Mushroom(
     id: '1',
@@ -33,7 +34,7 @@ List<Mushroom> testMushrooms = [
     occurrence: 'Common',
     activeMonths: [1,8,9,10],
     symbols: [GumbaSymbols.edible.value, GumbaSymbols.growsInGrassLand.value ],
-    type : "pipe"
+    type : 'pipe'
   ),
     Mushroom(
     id: '1',

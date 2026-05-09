@@ -5,14 +5,21 @@ import 'package:gumba/logger.dart';
 import 'package:gumba/style.dart';
 import 'package:provider/provider.dart';
 
-class GumbaAppBar extends StatelessWidget  {
+/// Custom app bar for the application
+/// Contains buttons for encyclopedia, saved gumbas,
+/// and a main button that can be set to different functions.
+class GumbaAppBar extends StatelessWidget {
+  ///
   const GumbaAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      height:  AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
-      margin: EdgeInsets.only(top: AppSpacing.xl ,bottom: AppBorderRadius.large),
+    return Container(
+      height: AppDimensions.appBarHeight(MediaQuery.sizeOf(context).height),
+      margin: const EdgeInsets.only(
+        top: AppSpacing.xl,
+        bottom: AppBorderRadius.large,
+      ),
       child: const Row(
         spacing: AppSpacing.large,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,8 +32,9 @@ class GumbaAppBar extends StatelessWidget  {
     );
   }
 }
-
+/// Lexicon button if tapped it will set the displayed to all mushhrooms.
 class GoToLexiconButton extends StatelessWidget {
+  ///
   const GoToLexiconButton({super.key});
 
   @override
@@ -37,77 +45,75 @@ class GoToLexiconButton extends StatelessWidget {
     );
   }
 }
-
-
-
+/// Main button in the appbar, currently set to just log a message when tapped,
+/// but will be modifieable to perform any desired action.
 class GumbaButton extends StatelessWidget {
+  ///
   const GumbaButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const AppBarButton(
-      imageURL: "assets/gumba_log.png",
-      onPressed: onSettingsButtonPressed,
+    return AppBarButton(
+      imageURL: AppImagePaths.gumbaIconImage,
+      onPressed: () => logger.d('Gumba button pressed'),
     );
   }
 }
-
+/// Sets the display to the mushrooms that are saved to user's profile.
 class SavedGumbasButton extends StatelessWidget {
+  ///
   const SavedGumbasButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  AppBarButton(
+    return AppBarButton(
       imageURL: AppImagePaths.savedGumbasIconImage,
       onPressed: () => onSavedGumbasButtonPressed(context),
     );
   }
 }
 
-class SettingsButton extends StatelessWidget {
-  const SettingsButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBarButton(
-      imageURL: "assets/gumba_log.png",
-      onPressed: onSettingsButtonPressed,
-    );
-  }
-}
-
+/// This is the abstraction for the appbar buttons
+/// it takes an image and a function to execute when tapped.
 class AppBarButton extends StatelessWidget {
+  ///
+  const AppBarButton({
+    required this.imageURL, required this.onPressed, super.key,
+  });
+  /// The icon image path for the button.
   final String imageURL;
+  /// The function to execute when the button is tapped.
   final VoidCallback onPressed;
-  const AppBarButton({super.key, required this.imageURL, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return GestureDetector(
-      onTap: () => (onPressed()),
+      onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
-          color: colors.onSecondary.withValues(alpha: .5)
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppBorderRadius.small),
+          ),
+          color: colors.onSecondary.withValues(alpha: .5),
         ),
-        
+
         child: Image.asset(imageURL),
       ),
     );
   }
 }
 
-void onSettingsButtonPressed() {
-  logger.d('Settings button pressed');
-}
 
+/// Sets the display controllers mushroom list to the general database.
 void onEncyclopediaButtonPressed(BuildContext context) {
   logger.d('Encyclopedia button pressed');
-  Provider.of<DisplayController>(context, listen: false).setDisplayedMushrooms = Provider.of<MushroomEncyclopedia>(context, listen: false).mushrooms;
+  Provider.of<DisplayController>(context, listen: false).displayedMushrooms =
+      Provider.of<MushroomEncyclopedia>(context, listen: false).mushrooms;
 }
-
+/// Sets the display controllers mushroom list to the profile's saved mushrooms.
 void onSavedGumbasButtonPressed(BuildContext context) {
   logger.d('Saved Gumbas button pressed');
-  Provider.of<DisplayController>(context, listen: false).setDisplayedMushrooms = Provider.of<SavedMushrooms>(context, listen: false).mushrooms;
+  Provider.of<DisplayController>(context, listen: false).displayedMushrooms =
+      Provider.of<SavedMushrooms>(context, listen: false).mushrooms;
 }

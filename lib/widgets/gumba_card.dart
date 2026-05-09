@@ -5,8 +5,13 @@ import 'package:gumba/data_controller.dart';
 import 'package:gumba/style.dart';
 import 'package:provider/provider.dart';
 
+/// This card is displaying detailed informations about mushrooms.
+/// This card is painted when a children in the GumbaList is tapped.
 class GumbaCard extends StatelessWidget {
-  const GumbaCard({super.key, required this.mushroom});
+  ///
+  const GumbaCard({required this.mushroom, super.key});
+
+  /// The mushroom which's data is dispayed
   final Mushroom mushroom;
 
   @override
@@ -22,10 +27,12 @@ class GumbaCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              GumbaCardTopBar(mushroom: mushroom,),
+              GumbaCardTopBar(
+                mushroom: mushroom,
+              ),
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: black),
                 ),
                 child: Image.asset(AppImagePaths.defaulMushroomImage),
               ),
@@ -57,14 +64,21 @@ class GumbaCard extends StatelessWidget {
   }
 }
 
+/// Custom bar to display the occurence of the mushroom throught the year.
+/// The widget calculates the color of the transitional and active months.
 class ActiveMonthsBar extends StatelessWidget {
-  const ActiveMonthsBar({super.key, required this.activeMonths});
+  ///
+  const ActiveMonthsBar({required this.activeMonths, super.key});
+
+  /// Active months are stored in a mushrooms.activeMonths field.
   final List<int> activeMonths;
 
+  /// Returs the colors of the month representing brick
+  ///  based on the mushrooms activity
   List<Color> setColorsForActiveMonths(List<int> activeMonths) {
     final baseColorList = List<Color>.filled(12, baseGreen);
 
-    for (int month in activeMonths) {
+    for (final month in activeMonths) {
       if (month == 1 && !activeMonths.contains(12)) {
         baseColorList[11] = gradiant;
         baseColorList[month - 1] = active;
@@ -96,7 +110,7 @@ class ActiveMonthsBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.black,
+          color: black,
           width: AppBorders.largeBorderSize,
         ),
       ),
@@ -111,10 +125,7 @@ class ActiveMonthsBar extends StatelessWidget {
           width: activeMonthsSectionWidth,
           decoration: BoxDecoration(
             color: monthColors[index],
-            border: Border.all(
-              color: Colors.black,
-              width: AppBorders.thinBordersize,
-            ),
+            border: Border.all(),
           ),
         ),
         itemCount: 12,
@@ -123,13 +134,18 @@ class ActiveMonthsBar extends StatelessWidget {
   }
 }
 
+/// Displays the symbols associated with the provided mushroom.
 class DisplaySymbols extends StatelessWidget {
+  ///
   const DisplaySymbols({
-    super.key,
-    required this.symbols,
-    required this.isVertical,
+    required this.symbols, required this.isVertical, super.key,
   });
+
+  ///
   final List<GumbaSymbol> symbols;
+
+  /// Wheather are the symbols should be painted vertically (true)
+  /// or horizontaly.
   final bool isVertical;
   @override
   Widget build(BuildContext context) {
@@ -137,22 +153,27 @@ class DisplaySymbols extends StatelessWidget {
         ? Column(
             spacing: AppSpacing.large,
             children: [
-              for (GumbaSymbol symbol in symbols) SymbolCard(symbol: symbol),
+              for (final GumbaSymbol symbol in symbols)
+                SymbolCard(symbol: symbol),
             ],
           )
         : Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: AppSpacing.large,
             children: [
-              for (GumbaSymbol symbol in symbols) SymbolCard(symbol: symbol),
+              for (final GumbaSymbol symbol in symbols)
+                SymbolCard(symbol: symbol),
             ],
           );
   }
 }
 
+/// Card to display the symbol
 class SymbolCard extends StatelessWidget {
-  const SymbolCard({super.key, required this.symbol});
+  ///
+  const SymbolCard({required this.symbol, super.key});
+
+  ///
   final GumbaSymbol symbol;
   @override
   Widget build(BuildContext context) {
@@ -160,43 +181,55 @@ class SymbolCard extends StatelessWidget {
       width: AppDimensions.circularButtonSize,
       decoration: BoxDecoration(
         border: Border.all(color: black),
-        borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.small)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppBorderRadius.small),
+        ),
       ),
-      child: Image.asset(symbol.iconPath));
-
+      child: Image.asset(symbol.iconPath),
+    );
   }
 }
 
+/// Displays the details of the mushroom 
+/// on the mushroom's provided fields of information.
 class Details extends StatelessWidget {
+  ///
   const Details(this.mushroom, {super.key});
+  ///
   final Mushroom mushroom;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        LabelWithText(label: "Flesh: ", text: mushroom.flesh),
-        LabelWithText(label: "Culinary use: ", text: mushroom.culinaryUse),
-        LabelWithText(label: "Occurrence: ", text: mushroom.occurrence),
+        LabelWithText(label: 'Flesh: ', text: mushroom.flesh),
+        LabelWithText(label: 'Culinary use: ', text: mushroom.culinaryUse),
+        LabelWithText(label: 'Occurrence: ', text: mushroom.occurrence),
         if (mushroom.cap != null)
-          LabelWithText(label: "Cap: ", text: mushroom.cap!),
+          LabelWithText(label: 'Cap: ', text: mushroom.cap!),
         if (mushroom.stem != null)
-          LabelWithText(label: "Stem: ", text: mushroom.stem!),
+          LabelWithText(label: 'Stem: ', text: mushroom.stem!),
         if (mushroom.gills != null)
-          LabelWithText(label: "Gills: ", text: mushroom.gills!),
+          LabelWithText(label: 'Gills: ', text: mushroom.gills!),
         if (mushroom.frutingLayer != null)
-          LabelWithText(label: "Fruiting Layer: ", text: mushroom.frutingLayer!),
+          LabelWithText(
+            label: 'Fruiting Layer: ',
+            text: mushroom.frutingLayer!,
+          ),
         if (mushroom.hymenium != null)
-          LabelWithText(label: "Hymenium: ", text: mushroom.hymenium!),
+          LabelWithText(label: 'Hymenium: ', text: mushroom.hymenium!),
       ],
     );
   }
 }
-
+/// Helper widget to display information with a label with different styling.
+/// (in a row)
 class LabelWithText extends StatelessWidget {
-  const LabelWithText({super.key, required this.label, required this.text});
-
+  ///
+  const LabelWithText({required this.label, required this.text, super.key});
+///
   final String label;
+  ///
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -205,28 +238,30 @@ class LabelWithText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: RichText(
         text: TextSpan(
-      children: [
-        TextSpan(text: label, style: textTheme.labelMedium),
-        TextSpan(text: text, style: textTheme.bodyMedium),
-      ],
+          children: [
+            TextSpan(text: label, style: textTheme.labelMedium),
+            TextSpan(text: text, style: textTheme.bodyMedium),
+          ],
         ),
       ),
     );
   }
 }
-
+/// The display cards top bar with save and return buttons.
 class GumbaCardTopBar extends StatelessWidget {
-  const GumbaCardTopBar({super.key, required this.mushroom});
+  ///
+  const GumbaCardTopBar({required this.mushroom, super.key});
+  ///
   final Mushroom mushroom;
   @override
   Widget build(BuildContext context) {
-    final DataController dataController = DataController();
-    final SavedMushrooms savedMushrooms = Provider.of<SavedMushrooms>(context);
+    final dataController = DataController();
+    final savedMushrooms = Provider.of<SavedMushrooms>(context);
     return Container(
-      padding: EdgeInsets.all(AppSpacing.small),
+      padding: const EdgeInsets.all(AppSpacing.small),
       decoration: BoxDecoration(
         border: Border.all(color: black),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(AppBorderRadius.small),
           topRight: Radius.circular(AppBorderRadius.small),
         ),
@@ -237,9 +272,10 @@ class GumbaCardTopBar extends StatelessWidget {
             onpressed: () => {Navigator.pop(context)},
             icon: Icons.back_hand,
           ),
-          Spacer(),
+          const Spacer(),
           GumbaCardTopBarButton(
-            onpressed: () => (dataController.saveMushroom(mushroom, savedMushrooms)),
+            onpressed: () =>
+                dataController.saveMushroom(mushroom, savedMushrooms),
             icon: Icons.save,
           ),
         ],
@@ -247,14 +283,15 @@ class GumbaCardTopBar extends StatelessWidget {
     );
   }
 }
-
+/// Abstraction of the buttons on the cards top bar
 class GumbaCardTopBarButton extends StatelessWidget {
+  /// Requires the icon of the button and the functionallity when tapped.
   const GumbaCardTopBarButton({
-    super.key,
-    required this.onpressed,
-    required this.icon,
+    required this.onpressed, required this.icon, super.key,
   });
+  ///
   final VoidCallback onpressed;
+  ///
   final IconData icon;
   @override
   Widget build(BuildContext context) {

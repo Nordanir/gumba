@@ -3,24 +3,28 @@ import 'package:gumba/classes/mushroom.dart';
 import 'package:gumba/style.dart';
 import 'package:gumba/widgets/gumba_card.dart';
 
+/// This widgets displays a list of mushrooms as a grid of cards.
 class GumbaList extends StatelessWidget {
-  const GumbaList({super.key, required this.mushrooms});
+  /// ANY list of mushrooms can be passed to display.
+  const GumbaList({required this.mushrooms, super.key});
+
+  ///Mushroom data as a list
   final List<Mushroom> mushrooms;
 
   @override
   Widget build(BuildContext context) {
     final appSize = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.all(AppSpacing.large),
+      padding: const EdgeInsets.all(AppSpacing.large),
       height: appSize.height * .8,
 
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,        
-    crossAxisSpacing: 12,     
-    mainAxisSpacing: 12,      
-    childAspectRatio: 0.85,   
-  ),
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.85,
+        ),
         itemCount: mushrooms.length,
         itemBuilder: (context, index) =>
             RepaintBoundary(child: GumbaListCard(mushroom: mushrooms[index])),
@@ -29,16 +33,24 @@ class GumbaList extends StatelessWidget {
   }
 }
 
+/// A card widget used by GumbaList to display mushroom data.
 class GumbaListCard extends StatelessWidget {
-  const GumbaListCard({super.key, required this.mushroom});
+  ///
+  const GumbaListCard({required this.mushroom, super.key});
+
+  ///
   final Mushroom mushroom;
 
   Color get _cardColor {
     switch (mushroom.type?.toLowerCase()) {
-      case 'neither': return gradiant;
-      case 'pipe':    return lightRed;
-      case 'disc':    return lightBlue;
-      default:        return baseGreen; // Fallback
+      case 'neither':
+        return gradiant;
+      case 'pipe':
+        return lightRed;
+      case 'disc':
+        return lightBlue;
+      default:
+        return baseGreen; // Fallback
     }
   }
 
@@ -47,7 +59,7 @@ class GumbaListCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => GumbaCard(mushroom: mushroom)),
+        MaterialPageRoute<void>(builder: (_) => GumbaCard(mushroom: mushroom)),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -57,16 +69,17 @@ class GumbaListCard extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 1,
               child: ClipRRect(
-                child: mushroom.imageUrl !=null ?  Image.asset(mushroom.imageUrl!) :
-                     Image.asset('assets/test.jpg', fit: BoxFit.cover),
+                child: mushroom.imageUrl != null
+                    ? Image.asset(mushroom.imageUrl!)
+                    : Image.asset('assets/test.jpg', fit: BoxFit.cover),
               ),
             ),
             Expanded(
-              flex: 1,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSpacing.small),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.small,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   spacing: AppSpacing.small,
