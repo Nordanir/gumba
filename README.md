@@ -1,17 +1,13 @@
-# gumba
+# G U M B A
 
-A new Flutter project.
+## This application is for enthusiasts who enjoy foraging, collecting or just generally knowing more about mushrooms.
 
-## Getting Started
+### With gumbapp you can:
+#### - Create your own database from mushrooms you find in a book or online or in the wild
+#### - From page to mushroom : scan your books to add your mushroom quickly with OCR and text recognition
+#### - Create collection of your favourites so you can access them later
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Built with : 
+#### -Flutter
+#### -Pyhton (OCR and text recognition) 
