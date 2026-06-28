@@ -1,4 +1,4 @@
-# G U M B A
+# G U M B A :mushroom::mushroom::mushroom:
 
 ## This application is for enthusiasts who enjoy foraging, collecting or just generally knowing more about mushrooms.
 
