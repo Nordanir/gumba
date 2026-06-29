@@ -14,9 +14,8 @@ class GumbaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appSize = MediaQuery.of(context).size;
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.large),
-      height: appSize.height * .8,
+    return SizedBox(
+      height: appSize.height * .6,
 
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:gumba/display_controller.dart';
+import 'package:gumba/style.dart';
+import 'package:gumba/widgets/action_bar.dart';
 import 'package:gumba/widgets/appbar.dart';
 import 'package:gumba/widgets/gumba_list.dart';
 import 'package:provider/provider.dart';
@@ -20,11 +22,16 @@ class _HomePageState extends State<HomePage> {
     final displayedMushrooms = Provider.of<DisplayController>(
       context,
     ).displayedMushrooms;
-    return Column(
-      children: [
-        const GumbaAppBar(),
-        GumbaList(mushrooms: displayedMushrooms),
-      ],
+    return Container(
+      
+      padding: const EdgeInsets.all(AppBorderRadius.large),
+      child: Column(
+        children: [
+          const GumbaAppBar(),
+          const ActionBar(),
+          GumbaList(mushrooms: displayedMushrooms),
+        ],
+      ),
     );
   }
 }

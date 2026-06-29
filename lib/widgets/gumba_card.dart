@@ -40,21 +40,24 @@ class GumbaCard extends StatelessWidget {
             ],
           ),
 
-          Text(mushroom.name, style: theme.textTheme.bodyLarge),
-          Text(mushroom.latinName, style: theme.textTheme.titleSmall),
+          InformationBlock(
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Column(
+                children :[
+                  Text(mushroom.name, style: theme.textTheme.bodyLarge),
+            Text(mushroom.latinName, style: theme.textTheme.titleSmall),
+                ]
+              ),
+              DisplaySymbols(symbols: mushroom.symbols, isVertical: false),
+            ],),
+          ),
           SizedBox(
             width: appWidth - 2 * AppSpacing.medium,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(flex: 7, child: Details(mushroom)),
-                Expanded(
-                  flex: 3,
-                  child: DisplaySymbols(
-                    symbols: mushroom.symbols,
-                    isVertical: true,
-                  ),
-                ),
               ],
             ),
           ),
@@ -178,7 +181,7 @@ class SymbolCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.circularButtonSize,
+      width: AppDimensions.topBarButtonSize,
       decoration: BoxDecoration(
         border: Border.all(color: black),
         borderRadius: const BorderRadius.all(
@@ -200,25 +203,27 @@ class Details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        LabelWithText(label: 'Flesh: ', text: mushroom.flesh),
-        LabelWithText(label: 'Culinary use: ', text: mushroom.culinaryUse),
-        LabelWithText(label: 'Occurrence: ', text: mushroom.occurrence),
-        if (mushroom.cap != null)
-          LabelWithText(label: 'Cap: ', text: mushroom.cap!),
-        if (mushroom.stem != null)
-          LabelWithText(label: 'Stem: ', text: mushroom.stem!),
-        if (mushroom.gills != null)
-          LabelWithText(label: 'Gills: ', text: mushroom.gills!),
-        if (mushroom.frutingLayer != null)
-          LabelWithText(
-            label: 'Fruiting Layer: ',
-            text: mushroom.frutingLayer!,
-          ),
-        if (mushroom.hymenium != null)
-          LabelWithText(label: 'Hymenium: ', text: mushroom.hymenium!),
-      ],
+    return InformationBlock(
+      child: Column(
+        children: [
+          LabelWithText(label: 'Flesh: ', text: mushroom.flesh),
+          LabelWithText(label: 'Culinary use: ', text: mushroom.culinaryUse),
+          LabelWithText(label: 'Occurrence: ', text: mushroom.occurrence),
+          if (mushroom.cap != null)
+            LabelWithText(label: 'Cap: ', text: mushroom.cap!),
+          if (mushroom.stem != null)
+            LabelWithText(label: 'Stem: ', text: mushroom.stem!),
+          if (mushroom.gills != null)
+            LabelWithText(label: 'Gills: ', text: mushroom.gills!),
+          if (mushroom.frutingLayer != null)
+            LabelWithText(
+              label: 'Fruiting Layer: ',
+              text: mushroom.frutingLayer!,
+            ),
+          if (mushroom.hymenium != null)
+            LabelWithText(label: 'Hymenium: ', text: mushroom.hymenium!),
+        ],
+      ),
     );
   }
 }
@@ -270,13 +275,13 @@ class GumbaCardTopBar extends StatelessWidget {
         children: [
           GumbaCardTopBarButton(
             onpressed: () => {Navigator.pop(context)},
-            icon: Icons.back_hand,
+            icon: Image.asset(AppImagePaths.backArrowIcon).image,
           ),
           const Spacer(),
           GumbaCardTopBarButton(
             onpressed: () =>
                 dataController.saveMushroom(mushroom, savedMushrooms),
-            icon: Icons.save,
+            icon: Image.asset(AppImagePaths.saveIcon).image,
           ),
         ],
       ),
@@ -292,22 +297,42 @@ class GumbaCardTopBarButton extends StatelessWidget {
   ///
   final VoidCallback onpressed;
   ///
-  final IconData icon;
+  final ImageProvider<Object> icon;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.circularButtonSize,
-      height: AppDimensions.circularButtonSize,
+      padding: const EdgeInsets.all(AppSpacing.xs),
+      width: AppDimensions.topBarButtonSize,
+      height: AppDimensions.topBarButtonSize,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
         border: Border.all(color: black),
       ),
-      child: IconButton(
-        onPressed: onpressed,
-        padding: EdgeInsets.zero,
-        icon: Icon(icon, size: AppDimensions.iconSize),
+      child: GestureDetector(
+        onTap: onpressed,
+        child: Image(image: icon),
       ),
     );
+  }
+}
+
+/// A helper widget to style the infromation containers
+class InformationBlock extends StatelessWidget {
+  ///
+  const InformationBlock({required this.child, super.key});
+  /// The widget inside the styled container.
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+      padding: const EdgeInsets.all(AppSpacing.small),
+      decoration:BoxDecoration(
+        color: baseGreen.withAlpha(178),
+        border: Border.all(color: gradiant),
+        borderRadius: const BorderRadius.all( 
+          Radius.circular(AppBorderRadius.small),
+        ),
+      ),
+      child:child);
   }
 }

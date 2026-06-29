@@ -21,7 +21,7 @@ class AppFilePaths {
         logger.i('🛠️ Creating directory...');
         await jsonDir.create(recursive: true);
       }
-
+ 
       if (!await jsonDir.exists()) {
         logger.e('❌ CRITICAL: Directory creation failed: ${jsonDir.path}');
         throw FileSystemException(
@@ -96,6 +96,11 @@ abstract class AppImagePaths {
   ///
   static const String hasHealingPropertiesIconImage =
       'assets/has_healing_properties_icon.png';
+  ///
+  static const String backArrowIcon = 'assets/back_arrow.png';
+  ///
+  static const String saveIcon = 'assets/save_gumba_icon.png';
+
 }
 
 /// Color for the highlights and the default unscpecified mushroom type.
@@ -161,6 +166,8 @@ ThemeData fairyGumba = ThemeData(
 
 /// This class contains spacings throught the app.
 abstract class AppSpacing {
+  /// 
+  static const double xs = 4;
   ///
   static const double small = 8;
 
@@ -198,10 +205,12 @@ abstract class AppDimensions {
   static double defaulDeviceWidth = 1080;
 
   ///
-  static double circularButtonSize = 28;
+  static double topBarButtonSize = 36;
 
   ///
   static double iconSize = 16;
+  ///
+  
 
   /// Calculates the height of the custom appbar
   /// (which is not a PreferredSizeWidget).
