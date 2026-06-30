@@ -100,6 +100,17 @@ abstract class AppImagePaths {
   static const String backArrowIcon = 'assets/back_arrow.png';
   ///
   static const String saveIcon = 'assets/save_gumba_icon.png';
+  ///
+  static const String addMushroomIcon = 'assets/add_mushroom_icon.png';
+  ///
+  static const String sortIcon = 'assets/sort_icon.png';
+  ///
+  static const String sortOrderUpIcon = 'assets/sort_order_up_icon.png';
+  ///
+  static const String sortOrderDownIcon = 'assets/sort_order_down_icon.png';
+  ///
+  static const String filderIcon = 'assets/filter_icon.png';
+
 
 }
 
